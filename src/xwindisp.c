@@ -253,7 +253,7 @@ static void
 my_err(s)
   char   *s;
 {
-  fprintf(stderr, s);
+  fprintf(stderr, "%s", s);
   Exit(1);
 }
 

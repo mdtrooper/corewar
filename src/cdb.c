@@ -2582,7 +2582,7 @@ results(outp)
       fprintf(outp, nameByAuthorScores, warrior[idxV[i]].name, warrior[idxV[i]].authorName,
               scrV[idxV[i]]);
       if (warriors > 2) {
-        fprintf(outp, resultsAre);
+        fprintf(outp, "%s", resultsAre);
         for (j = 0; j < warriors; ++j) {
           fprintf(outp, " %d", warrior[idxV[i]].score[j]);
         }

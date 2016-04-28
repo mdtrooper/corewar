@@ -289,7 +289,7 @@ clp_parse(clopt, filep)
               if (next_input(filep, inputs)) {
                 if (!strcmp(inputs, "-")) {
                   newFile = stdin;
-                  fprintf(stderr, readingStdin);
+                  fprintf(stderr, "%s", readingStdin);
                 } else {
                   if ((newFile = fopen(inputs, "r")) == NULL) {
                     code = FILENAME;        /* command file not found */
@@ -430,11 +430,11 @@ ERROR:
     errout(outs);
     break;
   case MEMORY:
-    sprintf(outs, outOfMemory);
+    sprintf(outs, "%s", outOfMemory);
     errout(outs);
     break;
   case FILENAME:
-    sprintf(outs, cannotOpenParameterFile);
+    sprintf(outs, "%s", cannotOpenParameterFile);
     errout(outs);
     break;
   }

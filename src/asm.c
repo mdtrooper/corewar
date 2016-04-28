@@ -652,7 +652,7 @@ textout(str)
   macputs(str);
 #else
   if (!inCdb)
-    fprintf(stderr, str);
+    fprintf(stderr, "%s", str);
 #if defined DOSALLGRAPHX
   else {
     if (displayMode == TEXT)
@@ -823,7 +823,7 @@ errprn(code, aline, arg)
 #ifdef __MAC__
     textout(notEnoughMemErr);
 #else
-    fprintf(stderr, notEnoughMemErr);
+    fprintf(stderr, "%s", notEnoughMemErr);
 #endif
     Exit(MEMERR);
     break;
@@ -906,7 +906,7 @@ errprn(code, aline, arg)
   }
 
   if (ierr >= ERRMAX) {
-    sprintf(outs, tooManyMsgErr);
+    sprintf(outs, "%s", tooManyMsgErr);
 #ifndef VMS
     textout(outs);
 #else

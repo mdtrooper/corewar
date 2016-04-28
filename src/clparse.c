@@ -214,6 +214,10 @@ next_input(filep, inputs)
   char   *inputs;
 {
   int     i;
+  
+  int count_reading; // For avoid the warnings
+  char* return_fgets; // For avoid the warnings
+  
   if (filep == NULL) {                /* read from command line */
     if (argc) {
       strcpy(inputs, *argv);
@@ -224,19 +228,19 @@ next_input(filep, inputs)
   } else {
     *inputs = '\0';
     /* if (!feof(filep))  */
-    fscanf(filep, "%s", inputs);
+    count_reading = fscanf(filep, "%s", inputs);
     if (*inputs == '"') {        /* quoted string */
       *inputs = ' ';
       i = strlen(inputs);
       if (inputs[i - 1] == '"')
         inputs[i - 1] = '\0';
       else
-        fscanf(filep, "%[^\"]%*[\"]", inputs + i);
+        count_reading = fscanf(filep, "%[^\"]%*[\"]", inputs + i);
     }
     while (*inputs == ';') {
-      fgets(inputs, 100, filep);
+      return_fgets = fgets(inputs, 100, filep);
       *inputs = '\0';
-      fscanf(filep, "%s", inputs);
+      count_reading = fscanf(filep, "%s", inputs);
     }
   }
   if (!strcmp(inputs, "$"))        /* end of input marker */

@@ -1547,7 +1547,7 @@ subst_eval(inpStr, result)
       substitute(buf[bi1], outs2, outs, buf[bi2]);
     }
     if (warriors < MAXWARRIOR) {/* PCN where N==warriors is PC */
-      sprintf(outs, "%d", (targetID == QUEUE || targetID == PSP ?
+      sprintf(outs, "%ld", (targetID == QUEUE || targetID == PSP ?
                            0 : (targetID == WARRIOR ?
                                 W - warrior : progCnt)));
       sprintf(outs2, "PC%d", warriors);
@@ -1555,16 +1555,16 @@ subst_eval(inpStr, result)
       substitute(buf[bi1], outs2, outs, buf[bi2]);
     }
     SWITCHBI;
-    sprintf(outs, "%d", (targetID == QUEUE || targetID == PSP ?
+    sprintf(outs, "%ld", (targetID == QUEUE || targetID == PSP ?
                          0 : (targetID == WARRIOR ?
                               W - warrior : progCnt)));
     substitute(buf[bi1], "PC", outs, buf[bi2]);
     SWITCHBI;
-    sprintf(outs, "%d", (cycle + (warriorsLeft ? warriorsLeft : 1) - 1) /
+    sprintf(outs, "%ld", (cycle + (warriorsLeft ? warriorsLeft : 1) - 1) /
             (warriorsLeft ? warriorsLeft : 1));
     substitute(buf[bi1], "CYCLE", outs, buf[bi2]);
     SWITCHBI;
-    sprintf(outs, "%d", round);
+    sprintf(outs, "%d", round_var);
     substitute(buf[bi1], "ROUND", outs, buf[bi2]);
 
     SWITCHBI;
@@ -1875,7 +1875,7 @@ print_registers()
 #endif
   int     nFuture, nPast, count, taskHalf = (coreSize <= 10000 ? 7 : 5);
 
-  sprintf(outs, roundOfCycle, round, rounds,
+  sprintf(outs, roundOfCycle, round_var, rounds,
           (cycle + (warriorsLeft ? warriorsLeft : 1) - 1) /
           (warriorsLeft ? warriorsLeft : 1));
   cdb_fputs(outs, COND);

@@ -177,7 +177,7 @@ ADDR_T AA_Value, AB_Value;
 mem_struct FAR *memory;
 
 long    cycle;
-int     round;
+int     round_var;
 
 char    alloc_p = 0;                /* indicate whether memory has been allocated */
 int     warriorsLeft;                /* number of warriors still left in core */
@@ -311,7 +311,7 @@ register  int     temp;                        /* general purpose temporary vari
 #endif
 
   display_init();
-  round = 1;
+  round_var = 1;
   do {                                /* each round */
 #if defined(DOS16) && !defined(SERVER) && !defined(DOSTXTGRAPHX) && !defined(DOSGRXGRAPHX) && !defined(DJGPP)
     fputc('\r', stdout);        /* enable interruption by Ctrl-C */
@@ -1325,13 +1325,13 @@ nextround:
 #ifndef SERVER
     if (debugState == BREAK) {
       if (warriorsLeft == 1 && warriors != 1)
-	sprintf(outs, warriorTerminatedEndOfRound, W - warrior, W->name, round);
+	sprintf(outs, warriorTerminatedEndOfRound, W - warrior, W->name, round_var);
       else
-	sprintf(outs, endOfRound, round);
+	sprintf(outs, endOfRound, round_var);
       debugState = cdb(outs);
     }
 #endif
-  } while (++round <= rounds);
+  } while (++round_var <= rounds);
 
   display_close();
 #ifdef PERMUTATE
